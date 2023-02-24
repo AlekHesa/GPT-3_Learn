@@ -22,19 +22,20 @@ def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.
     text = response['choices'][0]['text'].strip()
     return text
 
-if __name__ == '__main__':
-    convo = list()
-    while True:
-        user_input = input("USER: ")
-        convo.append('USER: %s' % user_input)
-        text_block = '\n'.join(convo)
-        print(text_block)
-        prompt = open_file('prompt.txt').replace('<<BLOCK>>',text_block)
-        print(prompt)
-        prompt = prompt + '\nJAX:'  
-        response = chatbot(prompt)
-        #print('JAX:', response)
-        convo.append('JAX: %s' % response)
+def summarize(prompt):
+    response = ai.Completion.create(
+        engine = 'text-curie-001',
+        prompt = prompt,
+        temperature = 0.7,
+        max_tokens = 100,
+        top_p = 1.0,
+        frequency_penalty = 0.0,
+        presence_penalty = 0.0,
+        
+    )
+
+    text = response['choices'][0]['text']
+    return text
 
 
 
