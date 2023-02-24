@@ -1,6 +1,7 @@
 import streamlit as st
 from chat import *
 from streamlit_chat import message
+import time
 
 st.title("GPT-3 NLP")
 
@@ -10,6 +11,8 @@ with tab1:
     st.header("GPT-3 Chatbot : JAX")
     def text():
         input_user = st.text_input("USER:",key="input")
+        
+        
         return input_user
 
     if 'generated' not in st.session_state:
@@ -18,20 +21,28 @@ with tab1:
     if 'past' not in st.session_state:
         st.session_state['past'] = []
 
-    user_input = text()
+    characteristics = st.text_input("Characteristics",key="char")
+    
+    if characteristics:
+        user_input = text()
+        convo = list()
+        convo.append('USER: %s' % user_input)
+        text_block = '\n'.join(convo)
+        char = characteristics + text_block+"\nJAX: "
+        res = chatbot(char)
 
+    
+        if user_input:
+            output = chatbot(user_input)
 
-    if user_input:
-        output = gpt3_completion(user_input)
+            st.session_state.past.append(user_input)
+            st.session_state.generated.append(res)
 
-        st.session_state.past.append(user_input)
-        st.session_state.generated.append(output)
+        if st.session_state['generated']:
 
-    if st.session_state['generated']:
-
-        for i in range(len(st.session_state['generated'])-1, -1, -1):
-            message(st.session_state["generated"][i], key=str(i))
-            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+            for i in range(len(st.session_state['generated'])-1, -1, -1):
+                message(st.session_state["generated"][i], key=str(i))
+                message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
 
 
 
