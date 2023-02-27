@@ -56,11 +56,7 @@ with tab2:
         res = proccess(test)
         st.write(res)
     else:
-        st.write("Please enter a text")
-    
-
-    
-    
+        st.write("Please enter a text")   
 with tab3 :
     st.header("Generate the text")
     
