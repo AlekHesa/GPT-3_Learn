@@ -22,7 +22,7 @@ def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.
     text = response['choices'][0]['text'].strip()
     return text
 
-def summarize(prompt):
+def proccess(prompt):
     response = ai.Completion.create(
         engine = 'text-curie-001',
         prompt = prompt,
