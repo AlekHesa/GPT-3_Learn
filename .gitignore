@@ -1,1 +1,17 @@
 key.txt
+
+if __name__ == '__main__':
+    convo = list()
+    while True:
+        user_input = input("USER: ")
+        convo.append('USER: %s' % user_input)
+        text_block = '\n'.join(convo)
+        print(text_block)
+        prompt = open_file('prompt.txt').replace('<<BLOCK>>',text_block)
+        print(prompt)
+        prompt = prompt + '\nJAX:'  
+        response = chatbot(prompt)
+        #print('JAX:', response)
+        convo.append('JAX: %s' % response)
+
+.env
