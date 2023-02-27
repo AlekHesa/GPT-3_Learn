@@ -6,7 +6,7 @@ import time
 st.title("GPT-3 NLP")
 
 
-tab1,tab2,tab3 = st.tabs(["Chatbot","Summarizer","Complete The Sentences"])
+tab1,tab2,tab3 = st.tabs(["Chatbot","Summarizer","Generate Text"])
 with tab1:
     st.header("GPT-3 Chatbot with Characteristics")
     def text():
