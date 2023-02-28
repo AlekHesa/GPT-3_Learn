@@ -37,7 +37,13 @@ def proccess(prompt):
     text = response['choices'][0]['text']
     return text
 
-
-
+def image_process(prompt):
+    response = ai.Image.create(
+        prompt = prompt,
+        n = 1,
+        size = "1024x1024"
+    )
+    image_url = response['data'][0]['url']
+    return image_url
 
     
