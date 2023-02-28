@@ -1,13 +1,14 @@
 import openai as ai
 import os
 from decouple import config
+import streamlit as st
 
 def open_file(filepath):
     with open(filepath,'r',encoding='utf-8') as infile:
         return infile.read()
 
 
-ai.api_key = config('key')
+ai.api_key = os.environ["key"]
 
 def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.0,freq_pen = 0.0,pres_pen = 0.0,stop=['JAX: ','USER: ']):
     prompt = prompt.encode(encoding='ASCII',errors='ignore').decode()
