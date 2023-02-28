@@ -21,6 +21,8 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+
+
 characteristics = st.text_input("Characteristics",key="char")
 
 if characteristics:
@@ -31,13 +33,15 @@ if characteristics:
     text_block = '\n'.join(convo)
     char = characteristics + text_block+"\nJAX: "
     res = chatbot(char)
-
+    
+    
 
     if user_input:
         output = chatbot(user_input)
 
         st.session_state.past.append(user_input)
         st.session_state.generated.append(res)
+        
 
     if st.session_state['generated']:
 
