@@ -1,5 +1,5 @@
 import streamlit as st
-from GPT3 import *
+from langproc import *
 from streamlit_chat import message
 import time
 
