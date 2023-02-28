@@ -15,6 +15,7 @@ if __name__ == '__main__':
         convo.append('JAX: %s' % response)
 
 .env
+
 https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json
 
 .streamlit
