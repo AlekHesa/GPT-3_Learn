@@ -26,6 +26,7 @@ characteristics = st.text_input("Characteristics",key="char")
 if characteristics:
     user_input = text()
     convo = list()
+    
     convo.append('USER: %s' % user_input)
     text_block = '\n'.join(convo)
     char = characteristics + text_block+"\nJAX: "
