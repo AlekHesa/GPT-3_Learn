@@ -1,6 +1,5 @@
 import openai as ai
 import os
-from decouple import config
 import streamlit as st
 
 def open_file(filepath):
