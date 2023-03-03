@@ -1,22 +1,22 @@
 import streamlit as st
 from GPT3 import *
+from io import StringIO
 
 
-st.title("Save your paragraph to txt")
 
-input_text = st.text_input("What do you want to write?")
+st.header("Upload your file")
 
-if input_text:
-    result = proccess_davinci(input_text)
-    st.write(result)
-    with open('result.txt','w') as f:
-        try:
-            f.write(result)
-            st.write("Success")
-        except:
-            st.write("Error")
-else:
-    st.write("Please enter a prompt")
+readpath = st.file_uploader("Upload your text")
+if readpath is not None:
+    stringio = StringIO(readpath.getvalue().decode('utf-8'))
+    readfile = stringio.read()
+    result = proccess_davinci(readfile)
+
+    btn_result = st.button("Proccess")
+    if btn_result:
+        st.write(readfile)
+
+
 
     
 
