@@ -24,9 +24,24 @@ def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.
     text = response['choices'][0]['text'].strip()
     return text
 
-def proccess(prompt):
+def proccess_curie(prompt):
     response = ai.Completion.create(
         engine = 'text-curie-001',
+        prompt = prompt,
+        temperature = 0.7,
+        max_tokens = 100,
+        top_p = 1.0,
+        frequency_penalty = 0.0,
+        presence_penalty = 0.0,
+        
+    )
+
+    text = response['choices'][0]['text']
+    return text
+
+def proccess_davinci(prompt):
+    response = ai.Completion.create(
+        engine = 'text-davinci-003',
         prompt = prompt,
         temperature = 0.7,
         max_tokens = 100,
