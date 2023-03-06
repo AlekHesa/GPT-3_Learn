@@ -63,4 +63,27 @@ def image_process(prompt):
     image_url = response['data'][0]['url']
     return image_url
 
-    
+
+def chatgpt_proc(prompt):
+    response = ai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = prompt,
+        temperature = 0.7,
+        max_tokens = 100,
+        top_p = 0.9
+    )
+    return response
+
+def code_completion(prompt):
+    response = ai.Completion.create(
+        engine = "code-davinci-002",
+        prompt = prompt,
+        temperature = 0.7,
+        max_tokens = 250,
+        top_p = 1.0,
+        frequency_penalty = 0.0,
+        presence_penalty = 0.0,
+    )
+    return response
+
+
