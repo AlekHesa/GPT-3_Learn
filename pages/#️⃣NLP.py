@@ -18,7 +18,7 @@ with tab1:
     sum.append(input_summary)
     if input_summary: 
         test = summary + input_summary
-        res = proccess_curie(test)
+        res = summarize(test)
         st.write(res)
     else:
         st.write("Please enter a text")   
@@ -28,7 +28,7 @@ with tab2 :
     input_gpt3 = st.text_input("What do you want to make?")
     
     if input_gpt3:
-        res = proccess_curie(input_gpt3)
+        res = proccess_davinci(input_gpt3)
         st.write(res)
     else:
         st.write("Please enter a text")

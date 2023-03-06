@@ -24,10 +24,10 @@ def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.
     text = response['choices'][0]['text'].strip()
     return text
 
-def proccess_curie(prompt):
+def summarize(prompt):
     response = ai.Completion.create(
-        engine = 'text-curie-001',
-        prompt = prompt,
+        engine = 'text-davinci-003',
+        prompt = 'please summarize this text in a few sentences :'+prompt,
         temperature = 0.7,
         max_tokens = 100,
         top_p = 1.0,
@@ -78,11 +78,11 @@ def code_completion(prompt):
     response = ai.Completion.create(
         engine = "code-davinci-002",
         prompt = prompt,
-        temperature = 0.7,
-        max_tokens = 250,
+        temperature = 0.1,
         top_p = 1.0,
         frequency_penalty = 0.0,
         presence_penalty = 0.0,
+        
     )
     return response
 

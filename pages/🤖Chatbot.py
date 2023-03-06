@@ -3,6 +3,8 @@ from GPT3 import *
 from streamlit_chat import message
 import time
 
+character = "the following is a conversation between USER and JAX."
+
 st.set_page_config(
     page_title="Chatbot",
     page_icon="🤖"
@@ -31,7 +33,7 @@ if characteristics:
     
     convo.append('USER: %s' % user_input)
     text_block = '\n'.join(convo)
-    char = characteristics + text_block+"\nJAX: "
+    char = character + characteristics + text_block+"\nJAX: "
     res = chatbot(char)
     
     

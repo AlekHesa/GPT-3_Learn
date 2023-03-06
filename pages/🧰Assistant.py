@@ -14,7 +14,7 @@ user_input = st.text_input("What would you like to know?",key='input')
 if user_input:
     convo.append({"role":"user","content":user_input})
     gpt3 = chatgpt_proc(convo)
-    convo.append({"role":"assistant","content": gpt3['choices'][0]['message']['content']})
-    st.write(gpt3['choices'][0]['message']['content'])          
+    convo.append({"role":"assistant","content": gpt3.choices[0].message.content})
+    st.markdown('**{}**'.format(gpt3.choices[0].message.content))          
      
 

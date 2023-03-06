@@ -10,13 +10,11 @@ convo = [
     
 
 
-st.header("Personal Assistant")
-user_input = st.text_input("Generate your code?",key='input')
+st.header("Generate Your Code")
+user_input = st.text_input("Generate your code",key='input')
 if user_input:
-    convo.append({"user":user_input})
     res = code_completion(user_input)
-    result = res['choices'][0]['text']
-    convo.append({"assistant":res})
+    result = res.choices[0].text
 
     with st.expander("Your Code"):
         st.code(result)
