@@ -4,13 +4,9 @@ from streamlit_chat import message
 import time
 
 
-convo = [
     
-]
-    
-
-
 st.header("Generate Your Code")
+option = st.selectbox("Choose your file Extension",('Python','Java','C'))
 user_input = st.text_area("Generate your code",key='input')
 complete = st.button("Generate your code")
 if complete:
@@ -19,8 +15,19 @@ if complete:
         result = res.choices[0].text
         with st.expander("Your Code"):
             st.code(result)
+        
+        if option == 'Python':
+            python = 'python.py'
+            st.download_button(label='Download your file',data=result,file_name=python)
+        elif option == 'Java':
+            java = 'Java.java'
+            st.download_button(label='Download your file',data=result,file_name=java)
+        elif option == 'C':
+            c = 'CLang.c'
+            st.download_button(label='Download your file',data=result,file_name=c)
+
 
 
         
-        filename = st.text_input("Your file Name & Extension")
-        st.download_button(label='Download your file',data=result,file_name='try2.py')
+        
+        

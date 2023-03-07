@@ -19,3 +19,5 @@ if __name__ == '__main__':
 https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json
 
 .streamlit
+
+testing.py
