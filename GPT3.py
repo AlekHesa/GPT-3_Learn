@@ -69,7 +69,7 @@ def chatgpt_proc(prompt):
         model = "gpt-3.5-turbo",
         messages = prompt,
         temperature = 0.7,
-        max_tokens = 100,
+        max_tokens = 512,
         top_p = 0.9
     )
     return response
