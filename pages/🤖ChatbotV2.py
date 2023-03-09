@@ -7,11 +7,13 @@ convo = [
     
 ]
     
-col1,col2 = st.columns([2,4])
+st.title("Welcome to Chatbot V2")
+
+col1,col2 = st.columns([2,5])
 
 with col1:
     st.subheader("System")
-    character = st.text_area("Give your Assistant's Character")
+    character = st.text_area("Give your Assistant a Character")
     if character:
         convo.append(
             {"role":"system","content":character}
