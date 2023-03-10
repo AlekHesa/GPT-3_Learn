@@ -27,7 +27,7 @@ def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.
 def summarize(prompt):
     response = ai.Completion.create(
         engine = 'text-davinci-003',
-        prompt = 'Please summarize this scientific article for me in a few sentences: '+prompt,
+        prompt = 'summarize this text in a few sentences: '+prompt,
         temperature = 0.1,
         max_tokens = 125,
         top_p = 1.0,
