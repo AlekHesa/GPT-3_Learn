@@ -1,5 +1,5 @@
 import streamlit as st
-
+from GPT3 import apikey
 from streamlit_chat import message
 import time
 
@@ -26,6 +26,10 @@ st.markdown(
 
 """
 )
-
+with st.container():
+    st.caption("Insert your API_KEY")
+    api_key = st.text_input(label="your API Key",type="password")
+    if api_key:
+        apikey(api_key)
 
 

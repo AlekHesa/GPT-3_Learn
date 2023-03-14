@@ -3,11 +3,12 @@ from GPT3 import *
 from io import StringIO
 from streamlit_chat import message
 
+input_temp = []
 convo = [
     
 ]
 
-list_of_filter = ['what','where','who','why','when','how','siapa','dimana','bagaimana','kapan','apa','hello']
+list_of_filter = ['what','where','who','why','when','how','siapa','dimana','bagaimana','kapan','apa','hello','Hello','Hallo','hallo']
     
 st.title("Welcome to AG-BOT")
 
@@ -31,24 +32,28 @@ st.subheader("Chat")
 user_input = st.text_area("USER")
 
 
-
 if user_input:
-    for filter in list_of_filter:
-        if filter in user_input:
-            convo.append(
-                {"role":"user","content":user_input}
-            )
-            response = chatgpt_proc(convo)
-            resp = response.choices[0].message.content
-            convo.append(
-                {"role":"assistant","content":resp}
-            )
+    input_temp.append(user_input)
+    if any(c in user_input for c in list_of_filter):
+        convo.append(
+            {"role":"user","content":user_input}
+        )
+        response = chatgpt_proc(convo)
+        resp = response.choices[0].message.content
+        convo.append(
+            {"role":"assistant","content":resp}
+        )
 
-            for item in convo:
-                if item["role"] == "user":
-                    st.session_state.past.append(item["content"])
-                if item["role"] == "assistant":
-                    st.session_state.generated.append(item["content"])
+        for item in convo:
+            if item["role"] == "user":
+                st.session_state.past.append(item["content"])
+            if item["role"] == "assistant":
+                st.session_state.generated.append(item["content"])
+    else: 
+        st.session_state.past.append(user_input)         
+        st.session_state.generated.append("Please ask me a question")
+
+                
        
            
 

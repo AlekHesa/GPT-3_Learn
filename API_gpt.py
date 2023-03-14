@@ -14,20 +14,20 @@ def Index():
 
 
 @app.post("/GPT3/Summary",tags=['GPT-3'])
-async def summary(text:TEXT):
+async def SUMMARY(text:TEXT):
     rangkum = summarize(text.text)
 
     return rangkum  
 
 
 @app.post("/GPT3/image",tags=['GPT-3'])
-async def image(text:TEXT):
+async def IMAGE(text:TEXT):
     gambar = image_process(text.text)
 
     return gambar
 
 @app.post("/GPT3/ag-bot",tags=['GPT-3'])
-async def agbot(text:TEXT):
+async def AGBOT(text:TEXT):
     convo = [
     
     ]

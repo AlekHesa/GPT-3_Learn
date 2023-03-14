@@ -4,8 +4,9 @@ import streamlit as st
 
 
 
-
-ai.api_key = st.secrets['key']
+def apikey(apikey):
+    ai.api_key = apikey
+    return ai.api_key
 
 def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.0,freq_pen = 0.0,pres_pen = 0.0,stop=['JAX: ','USER: ']):
     prompt = prompt.encode(encoding='ASCII',errors='ignore').decode()
