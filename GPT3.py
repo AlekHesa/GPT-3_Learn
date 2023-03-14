@@ -2,9 +2,7 @@ import openai as ai
 import os
 import streamlit as st
 
-def open_file(filepath):
-    with open(filepath,'r',encoding='utf-8') as infile:
-        return infile.read()
+
 
 
 ai.api_key = st.secrets['key']
