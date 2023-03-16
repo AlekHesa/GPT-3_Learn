@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from fastapi import Request
 import uvicorn
 from GPT3 import *
 from pydantic import BaseModel
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -11,10 +14,15 @@ class TEXT(BaseModel):
 class TOKEN(BaseModel):
     key : str
 
+templates = Jinja2Templates(directory="templates/")
 
-@app.get("/",tags=['Index'])
-def Index():
-    return {"Content":"Hello World"}
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse("main.html", {"request": request})
+
+@app.get("/chatbot",response_class=HTMLResponse)
+def chatbot(request: Request):
+    return templates.TemplateResponse("chatbot.html",{"request":request})
 
 @app.post("/GPT3",tags=['GPT-3'])
 async def key(API_KEY : TOKEN):
@@ -55,6 +63,11 @@ async def AGBOT(text:TEXT):
                 {"role":"assistant","content":resp}
             )
     return resp, convo
+
+@app.post("/GPT3/code-gen",tags=['GPT-3'])
+async def code_generator(text:TEXT):
+    generate_code = code_completion(text.text)
+    return generate_code
 
 
 

@@ -78,7 +78,7 @@ def code_completion(prompt):
         engine = "code-davinci-002",
         prompt = prompt,
         temperature = 0.1,
-        max_tokens = 512,
+        max_tokens = 1024,
         top_p = 1.0,
         frequency_penalty = 0.0,
         presence_penalty = 0.0,

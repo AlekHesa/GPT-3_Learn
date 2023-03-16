@@ -33,10 +33,10 @@ user_input = st.text_area("USER")
 
 
 if user_input:
-    input_temp.append(user_input)
-    if any(c in user_input for c in list_of_filter):
+    input_lower = user_input.lower()
+    if any(c in input_lower for c in list_of_filter):
         convo.append(
-            {"role":"user","content":user_input}
+            {"role":"user","content":input_lower}
         )
         response = chatgpt_proc(convo)
         resp = response.choices[0].message.content
