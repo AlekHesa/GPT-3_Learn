@@ -5,8 +5,25 @@ from GPT3 import *
 from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class TEXT(BaseModel):
     text : str
@@ -14,7 +31,7 @@ class TEXT(BaseModel):
 class TOKEN(BaseModel):
     key : str
 
-templates = Jinja2Templates(directory="templates/")
+templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
@@ -26,8 +43,8 @@ def chatbot(request: Request):
 
 @app.post("/GPT3",tags=['GPT-3'])
 async def key(API_KEY : TOKEN):
-    api_key=apikey(API_KEY.key)
-    return api_key
+    api_key= apikey(API_KEY.key)
+    return {"Success" : api_key}
 
 @app.post("/GPT3/Summary",tags=['GPT-3'])
 async def SUMMARY(text:TEXT):
