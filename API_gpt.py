@@ -13,7 +13,8 @@ origins = [
     "https://localhost.tiangolo.com",
     "http://localhost",
     "http://localhost:8080",
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
+    "http://localhost:3000/"
 ]
 
 app.add_middleware(
@@ -26,17 +27,16 @@ app.add_middleware(
 
 
 class TEXT(BaseModel):
-    text : str
+    data : str
 
 class TOKEN(BaseModel):
     key : str
 
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse("main.html", {"request": request})
-
+@app.get("/")
+def home():
+    return {"Message":"Hello World"}
 @app.get("/chatbot",response_class=HTMLResponse)
 def chatbot(request: Request):
     return templates.TemplateResponse("chatbot.html",{"request":request})
@@ -48,9 +48,16 @@ async def key(API_KEY : TOKEN):
 
 @app.post("/GPT3/Summary",tags=['GPT-3'])
 async def SUMMARY(text:TEXT):
-    rangkum = summarize(text.text)
+    
+    rangkum = summarize(text.data)
 
     return rangkum  
+
+@app.post("/GPT3/Test")
+def testing(text:TEXT):
+    res = text.text
+
+    return res
 
 
 @app.post("/GPT3/image",tags=['GPT-3'])
