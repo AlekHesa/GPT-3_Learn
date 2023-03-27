@@ -23,6 +23,7 @@ def chatbot(prompt,engine ='text-davinci-003',temp = 0.7,tokens = 100,top_p = 1.
     text = response['choices'][0]['text'].strip()
     return text
 
+
 def summarize(prompt):
     response = ai.Completion.create(
         engine = 'text-davinci-003',
@@ -75,15 +76,16 @@ def chatgpt_proc(prompt):
 
 def code_completion(prompt):
     response = ai.Completion.create(
-        engine = "code-davinci-002",
+        engine = "text-davinci-003",
         prompt = prompt,
         temperature = 0.1,
         max_tokens = 1024,
         top_p = 1.0,
         frequency_penalty = 0.0,
         presence_penalty = 0.0,
-        
+    
     )
-    return response
+    result_parse = response.choices[0].text
+    return result_parse
 
 

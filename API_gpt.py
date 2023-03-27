@@ -14,7 +14,8 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://127.0.0.1:8000",
-    "http://localhost:3000/"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 app.add_middleware(
@@ -53,16 +54,16 @@ async def SUMMARY(text:TEXT):
 
     return rangkum  
 
-@app.post("/GPT3/Test")
+@app.post("/GPT3/Davinci")
 def testing(text:TEXT):
-    res = text.text
+    res = proccess_davinci(text.data)
 
     return res
 
 
 @app.post("/GPT3/image",tags=['GPT-3'])
 async def IMAGE(text:TEXT):
-    gambar = image_process(text.text)
+    gambar = image_process(text.data)
 
     return gambar
 
@@ -80,17 +81,17 @@ async def AGBOT(text:TEXT):
     if prompt:
         convo.append({"role":"system","content":prompt})
         if text:
-            convo.append({"role":"user","content":text.text})
+            convo.append({"role":"user","content":text.data})
             response = chatgpt_proc(convo)
             resp = response.choices[0].message.content
             convo.append(
                 {"role":"assistant","content":resp}
             )
-    return resp, convo
+    return resp
 
 @app.post("/GPT3/code-gen",tags=['GPT-3'])
 async def code_generator(text:TEXT):
-    generate_code = code_completion(text.text)
+    generate_code = code_completion(text.data)
     return generate_code
 
 

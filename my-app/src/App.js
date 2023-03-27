@@ -5,8 +5,8 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import Navbar from "./components/navbar";
-
+import MyChatbot from "./Chatbot";
+import NavPage from "./components/navigation";
 
 function Summary_Pages() {
 
@@ -14,6 +14,14 @@ function Summary_Pages() {
 
   const[prompt,setPrompt] = useState("");
   const[response,setResponse] = useState("");
+  const[convo,setConvo] = useState([]);
+
+  const addMessage = (message, role) => {
+    const id = Date.now(); // generate a unique ID for the message
+    setConvo([...convo, { id, role, content: message }]);
+  }
+
+
 
   const addApiKEY = (e) =>{
     e.preventDefault();
@@ -41,8 +49,14 @@ function Summary_Pages() {
     })
   }
 
+
+  
   const handleChat = (e) =>{
     e.preventDefault();
+
+    addMessage(prompt, 'user');
+    
+
 
     // const data = { "data": prompt };
     // axios.post("http://localhost:8000/GPT3/Test", 
@@ -50,7 +64,7 @@ function Summary_Pages() {
     // ,data)
     const data = {"data":prompt}
     axios.post(
-      "http://localhost:8000/GPT3/ag-bot",
+      "http://localhost:8000/GPT3/Summary",
       data,
       {headers: {
         'Content-Type':'application/json'
@@ -58,12 +72,16 @@ function Summary_Pages() {
     )
     .then((res) =>{
         setResponse(res.data)
+        addMessage(res.data, 'assistant');
+
     })
     .catch((err) => {
       console.error(err)
     })
   }
   return (
+ <>
+  <MyChatbot/>
   <div>
     {/* <Navbar></Navbar> */}
     <div className="container text-center">
@@ -100,16 +118,26 @@ function Summary_Pages() {
             style={{'borderRadius':'50px',"font-weight":"bold"}}  >Summarize Text</button>
           </span>
         </form>
-          <h5 className="card text-white bg-dark mb-3">Your Tasks</h5>
+          <h5 className="card text-white bg-dark mb-3">Result</h5>
           <div>
-          {response}
+            {response}
+                {/* {convo.map((message) => {
+                  if (message.role === 'user') {
+                    return <div key={message.id} className="user-message">{message.content}</div>
+                  } else if (message.role === 'assistant') {
+                    return <div key={message.id} className="assistant-message">{message.content}</div>
+                  }
+                })} */}
           </div>
       </div>
     </div>
     </div>
+                    
+    </>   
+
   
  
-    
+
    
   );
 }
